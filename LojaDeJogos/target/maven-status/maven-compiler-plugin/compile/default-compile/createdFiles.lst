@@ -1,0 +1,10 @@
+br\edu\femass\lojadejogos\view\HelloApplication.class
+module-info.class
+br\edu\femass\lojadejogos\controller\ClienteController.class
+br\edu\femass\lojadejogos\model\Fornecedor.class
+br\edu\femass\lojadejogos\model\Jogo.class
+br\edu\femass\lojadejogos\dao\ClienteDao.class
+br\edu\femass\lojadejogos\dao\DaoPostgres.class
+br\edu\femass\lojadejogos\dao\Dao.class
+br\edu\femass\lojadejogos\model\Classificacao.class
+br\edu\femass\lojadejogos\model\Cliente.class
