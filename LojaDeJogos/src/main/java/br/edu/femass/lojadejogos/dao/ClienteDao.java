@@ -16,7 +16,8 @@ public class ClienteDao extends DaoPostgres implements Dao<Cliente>{
                 "cliente.nome as nome, " +
                 "cliente.ano_nascimento as ano_nascimento, " +
                 "cliente.ativo as ativo " +
-                "FROM cliente";
+                "FROM cliente " +
+                "ORDER BY cliente.id";
         PreparedStatement ps = getPreparedStatement(sql, false);
         ResultSet rs = ps.executeQuery();
 

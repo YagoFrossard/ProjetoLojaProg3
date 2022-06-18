@@ -6,15 +6,14 @@ public class Jogo {
     private Long codigo;
     private String nome;
     private Integer anoLancamento;
-    private Float precoPadrao;
+    private Double precoPadrao;
     private Integer unidEstoque = 0;
     private Classificacao classificacao;
 
-    public Jogo(String nome, Integer anoLancamento, Float precoPadrao, Classificacao classificacao) {
+    public Jogo(String nome, Integer anoLancamento, Double precoPadrao) {
         this.nome = nome;
         this.anoLancamento = anoLancamento;
         this.precoPadrao = precoPadrao;
-        this.classificacao = classificacao;
     }
 
     public Long getCodigo() {
@@ -41,11 +40,11 @@ public class Jogo {
         this.anoLancamento = anoLancamento;
     }
 
-    public Float getPrecoPadrao() {
+    public Double getPrecoPadrao() {
         return precoPadrao;
     }
 
-    public void setPrecoPadrao(Float precoPadrao) {
+    public void setPrecoPadrao(Double precoPadrao) {
         this.precoPadrao = precoPadrao;
     }
 
@@ -63,6 +62,20 @@ public class Jogo {
 
     public void setClassificacao(Classificacao classificacao) {
         this.classificacao = classificacao;
+    }
+
+    public Double comprar(Integer num){
+        this.unidEstoque += num;
+        return num * this.precoPadrao;
+    }
+
+    public Double vender(Integer num){
+        if(num <= this.unidEstoque){
+            this.unidEstoque -= num;
+            return num * this.precoPadrao;
+        }else{
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override

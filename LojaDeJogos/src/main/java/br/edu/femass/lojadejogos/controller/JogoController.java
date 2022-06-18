@@ -55,6 +55,9 @@ public class JogoController implements Initializable {
     private TextField TxtPrecoCompra;
 
     @FXML
+    private TextField TxtUnidadeEstoque;
+
+    @FXML
     private ComboBox CboClassificacao;
 
     private void limparTela() {
@@ -62,6 +65,7 @@ public class JogoController implements Initializable {
         TxtNome.setText("");
         TxtAnoLancamento.setText("");
         TxtPrecoCompra.setText("");
+        TxtUnidadeEstoque.setText("");
         CboClassificacao.setValue(Classificacao.EC);
     }
 
@@ -71,6 +75,7 @@ public class JogoController implements Initializable {
         TxtPrecoCompra.setDisable(!incluir);
         BtnAceitar.setDisable(!incluir);
         BtnCancelar.setDisable(!incluir);
+        CboClassificacao.setDisable(!incluir);
         BtnAdicionar.setDisable(incluir);
         BtnAtualizar.setDisable(incluir);
         LstJogos.setDisable(incluir);
@@ -85,6 +90,8 @@ public class JogoController implements Initializable {
         }
         ObservableList<Jogo> jogosOb = FXCollections.observableArrayList(jogos);
         LstJogos.setItems(jogosOb);
+
+        CboClassificacao.getItems().setAll(Classificacao.values());
     }
 
     private void exibirJogo(){
@@ -92,7 +99,10 @@ public class JogoController implements Initializable {
         if(jogo==null) return;
         TxtNome.setText(jogo.getNome());
         TxtCodigo.setText(jogo.getCodigo().toString());
+        TxtPrecoCompra.setText(jogo.getPrecoPadrao().toString());
         TxtAnoLancamento.setText(jogo.getAnoLancamento().toString());
+        TxtUnidadeEstoque.setText(jogo.getUnidEstoque().toString());
+        CboClassificacao.setValue(jogo.getClassificacao());
     }
 
     @FXML
@@ -139,9 +149,10 @@ public class JogoController implements Initializable {
         Jogo jogo = new Jogo(
                 TxtNome.getText(),
                 Integer.parseInt(TxtAnoLancamento.getText()),
-                Float.parseFloat(TxtPrecoCompra.getText()),
-                (Classificacao) CboClassificacao.getValue()
+                Double.parseDouble(TxtPrecoCompra.getText())
         );
+
+        jogo.setClassificacao((Classificacao) CboClassificacao.getValue());
 
         try {
             jogoDao.gravar(jogo);

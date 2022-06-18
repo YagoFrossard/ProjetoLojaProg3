@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="406.0" minWidth="760.0" prefHeight="406.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.lojadejogos.controller.MainController">
+   <children>
+      <HBox prefHeight="109.0" prefWidth="766.0">
+         <children>
+            <Label prefHeight="113.0" prefWidth="774.0" text="              Loja de Jogos Online" textAlignment="CENTER">
+               <font>
+                  <Font size="45.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <HBox layoutY="109.0" prefHeight="149.0" prefWidth="766.0">
+         <children>
+            <Button fx:id="BtnFornecedores" mnemonicParsing="false" onAction="#BtnFornecedores_Click" prefHeight="89.0" prefWidth="131.0" text="Gerenciar Fornecedores" textAlignment="CENTER" wrapText="true">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="BtnJogos" mnemonicParsing="false" onAction="#BtnJogos_Click" prefHeight="89.0" prefWidth="126.0" text="Gerenciar Jogos / Ver estoque" textAlignment="CENTER" wrapText="true">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="BtnClientes" mnemonicParsing="false" onAction="#BtnClientes_Click" prefHeight="89.0" prefWidth="133.0" text="Gerenciar Clientes">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="BtnComprar" mnemonicParsing="false" onAction="#BtnComprar_Click" prefHeight="89.0" prefWidth="131.0" text="Comprar Jogos">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <HBox layoutY="258.0" prefHeight="149.0" prefWidth="766.0">
+         <children>
+            <Button fx:id="BtnVender" mnemonicParsing="false" onAction="#BtnVender_Click" prefHeight="89.0" prefWidth="131.0" text="Vender Jogos">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="215.0" right="30.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="BtnCaixa" alignment="CENTER" mnemonicParsing="false" onAction="#BtnCaixa_Click" prefHeight="89.0" prefWidth="126.0" text="Fechar Caixa" textAlignment="CENTER" wrapText="true">
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="150.0" top="30.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</Pane>

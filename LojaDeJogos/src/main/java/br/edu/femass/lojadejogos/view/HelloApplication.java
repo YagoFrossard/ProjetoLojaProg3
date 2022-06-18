@@ -8,12 +8,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    //TODO: Criar a tela main para ligar às outras telas
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/br.edu.femass.lojadejogos/fornecedor-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/br.edu.femass.lojadejogos/main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 760, 406);
-        stage.setTitle("Fornecedores!");
+        stage.setTitle("Loja de Jogos Online");
         stage.setScene(scene);
         stage.show();
     }

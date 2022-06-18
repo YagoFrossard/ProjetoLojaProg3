@@ -35,6 +35,30 @@ public class FornecedorDao extends DaoPostgres implements Dao<Fornecedor> {
         return fornecedores;
     }
 
+    public List<Fornecedor> listarAtivos() throws Exception {
+        String sql = "SELECT " +
+                "fornecedor.codigo as codigo, " +
+                "fornecedor.nome as nome, " +
+                "fornecedor.ativo as ativo " +
+                "FROM fornecedor " +
+                "WHERE fornecedor.ativo = true";
+        PreparedStatement ps = getPreparedStatement(sql, false);
+        ResultSet rs = ps.executeQuery();
+
+        List<Fornecedor> fornecedores = new ArrayList<>();
+
+        while(rs.next()){
+            Fornecedor fornecedor = new Fornecedor(
+                    rs.getString("nome")
+            );
+            fornecedor.setCodigo(rs.getLong("codigo"));
+            fornecedor.setAtivo(rs.getBoolean("ativo"));
+            fornecedores.add(fornecedor);
+        }
+
+        return fornecedores;
+    }
+
     @Override
     public void gravar(Fornecedor value) throws Exception {
         String sql = "INSERT INTO fornecedor (nome, ativo) VALUES (?,?)";
