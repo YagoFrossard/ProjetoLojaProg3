@@ -36,6 +36,33 @@ public class ClienteDao extends DaoPostgres implements Dao<Cliente>{
         return clientes;
     }
 
+    public List<Cliente> listarAtivos() throws Exception {
+        String sql = "SELECT " +
+                "cliente.id as id, " +
+                "cliente.nome as nome, " +
+                "cliente.ano_nascimento as ano_nascimento, " +
+                "cliente.ativo as ativo " +
+                "FROM cliente " +
+                "WHERE ativo = true " +
+                "ORDER BY cliente.id";
+        PreparedStatement ps = getPreparedStatement(sql, false);
+        ResultSet rs = ps.executeQuery();
+
+        List<Cliente> clientes = new ArrayList<>();
+
+        while(rs.next()){
+            Cliente cliente = new Cliente(
+                    rs.getString("nome"),
+                    rs.getInt("ano_nascimento")
+            );
+            cliente.setId(rs.getLong("id"));
+            cliente.setAtivo(rs.getBoolean("ativo"));
+            clientes.add(cliente);
+        }
+
+        return clientes;
+    }
+
     @Override
     public void gravar(Cliente value) throws Exception {
         String sql = "INSERT INTO cliente (nome, ano_nascimento, ativo) VALUES (?,?,?)";

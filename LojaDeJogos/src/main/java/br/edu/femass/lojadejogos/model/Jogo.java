@@ -64,22 +64,13 @@ public class Jogo {
         this.classificacao = classificacao;
     }
 
-    public Double comprar(Integer num){
-        this.unidEstoque += num;
-        return num * this.precoPadrao;
-    }
-
-    public Double vender(Integer num){
-        if(num <= this.unidEstoque){
-            this.unidEstoque -= num;
-            return num * this.precoPadrao;
-        }else{
-            throw new IllegalArgumentException();
-        }
+    public Boolean podeVender(Integer num){
+        return (!(num > unidEstoque));
     }
 
     @Override
     public String toString(){
-        return this.codigo + ": " + this.nome;
+        return this.codigo + ": " + this.nome + " - " +
+                this.unidEstoque + " unidades -> R$" + String.format("%.2f",this.precoPadrao);
     }
 }

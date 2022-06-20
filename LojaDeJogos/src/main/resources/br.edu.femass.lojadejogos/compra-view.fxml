@@ -45,7 +45,7 @@
                      <children>
                         <VBox prefHeight="260.0" prefWidth="211.0">
                            <children>
-                              <Label text="Carrinho:">
+                              <Label text="Carrinho da Loja:">
                                  <font>
                                     <Font size="18.0" />
                                  </font>

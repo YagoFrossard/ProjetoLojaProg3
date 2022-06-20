@@ -19,7 +19,8 @@ public class JogoDao extends DaoPostgres implements Dao<Jogo>{
                 "jogo.preco_padrao as preco_padrao, " +
                 "jogo.unid_estoque as unid_estoque, " +
                 "jogo.id_classificacao as id_classificacao " +
-                "FROM jogo";
+                "FROM jogo " +
+                "ORDER BY codigo";
         PreparedStatement ps = getPreparedStatement(sql, false);
         ResultSet rs = ps.executeQuery();
 

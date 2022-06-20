@@ -1,13 +1,15 @@
 package br.edu.femass.lojadejogos.model;
 
-public class ItemCompra {
+public class ItemVenda {
 
     private Jogo jogo;
     private Integer quantidade;
+    private Double precoVenda;
 
-    public ItemCompra(Jogo jogo, Integer quantidade){
+    public ItemVenda(Jogo jogo, Integer quantidade, Double precoVenda){
         this.jogo = jogo;
         this.quantidade = quantidade;
+        this.precoVenda = precoVenda;
     }
 
     public Jogo getJogo() {
@@ -26,10 +28,17 @@ public class ItemCompra {
         this.quantidade = quantidade;
     }
 
+    public Double getPrecoVenda() {
+        return precoVenda;
+    }
+
+    public void setPrecoVenda(Double precoVenda) {
+        this.precoVenda = precoVenda;
+    }
+
     @Override
     public String toString(){
         return this.jogo.getNome() + " : " +
-                this.quantidade + (this.quantidade == 1 ? " unidade ":" unidades ") +
-                "- Total: R$" + String.format("%.2f", this.jogo.getPrecoPadrao() * this.quantidade);
+                this.quantidade + (this.quantidade == 1 ? " unidade ":" unidades ");
     }
 }

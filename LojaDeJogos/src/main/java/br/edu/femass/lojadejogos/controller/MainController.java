@@ -59,7 +59,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void BtnVender_Click(ActionEvent evento) throws IOException {
-        abrirTela("vender", "Vender Jogos", 975d, 408d);
+        abrirTela("venda", "Vender Jogos", 975d, 408d);
     }
 
     @FXML
