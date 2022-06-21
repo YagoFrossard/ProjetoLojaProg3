@@ -51,4 +51,10 @@ public class Compra {
     public void setItens(List<ItemCompra> itens) {
         this.itens = itens;
     }
+
+    @Override
+    public String toString(){
+        return "Compra -> Id: " + this.id +
+                " - Total: R$" + String.format("%.2f",this.total);
+    }
 }

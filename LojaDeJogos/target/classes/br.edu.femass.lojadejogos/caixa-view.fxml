@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="406.0" minWidth="760.0" prefHeight="406.0" prefWidth="766.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.femass.lojadejogos.controller.CaixaController">
+    <children>
+        <VBox layoutX="1.0" layoutY="-1.0" prefHeight="406.0" prefWidth="394.0">
+            <children>
+                <ListView fx:id="LstTransacoes" prefHeight="327.0" prefWidth="334.0">
+                    <VBox.margin>
+                        <Insets left="30.0" right="30.0" top="15.0" />
+                    </VBox.margin>
+                </ListView>
+                <HBox prefHeight="100.0" prefWidth="200.0">
+                    <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                    </padding>
+               <children>
+                  <DatePicker fx:id="CalData">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </DatePicker>
+                  <Button fx:id="BtnBuscar" mnemonicParsing="false" onAction="#BtnBuscar_Click" prefHeight="25.0" prefWidth="59.0" text="Buscar">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="BtnPegarTodos" mnemonicParsing="false" onAction="#BtnPegarTodos_Click" text="Pegar Todos" textAlignment="CENTER" wrapText="true">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox layoutX="407.0" layoutY="1.0" prefHeight="399.0" prefWidth="355.0">
+            <children>
+                <HBox prefHeight="341.0" prefWidth="394.0">
+               <children>
+                  <GridPane prefHeight="321.0" prefWidth="355.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="121.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="234.0" minWidth="10.0" prefWidth="234.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="109.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="200.0" minHeight="10.0" prefHeight="194.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Total de Compras (R$)" />
+                        <Label text="Total de Vendas (R$)" GridPane.rowIndex="1" />
+                        <Label text="Total Geral (R$)" GridPane.rowIndex="2" />
+                        <TextField fx:id="TxtTotalCompras" disable="true" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="TxtTotalVendas" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </GridPane.margin>
+                        </TextField>
+                        <TextField fx:id="TxtTotalGeral" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <GridPane.margin>
+                              <Insets left="40.0" right="40.0" />
+                           </GridPane.margin>
+                        </TextField>
+                     </children>
+                     <HBox.margin>
+                        <Insets top="20.0" />
+                     </HBox.margin>
+                  </GridPane>
+               </children>
+                </HBox>
+                <HBox prefHeight="59.0" prefWidth="394.0">
+                    <padding>
+                        <Insets left="100.0" />
+                    </padding></HBox>
+            </children>
+        </VBox>
+    </children>
+</Pane>

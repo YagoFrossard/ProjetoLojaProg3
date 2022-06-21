@@ -60,18 +60,24 @@ public class CompraController implements Initializable {
     @FXML
     private TextField TxtTotal;
 
-    private void atualizarLista(){
-        List<Fornecedor> fornecedores;
+    private void atualizarLista(Boolean primerioLoad){
+        if(primerioLoad){
+            List<Fornecedor> fornecedores;
+            try {
+                fornecedores = fornecedorDao.listarAtivos();
+            } catch (Exception e) {
+                fornecedores = new ArrayList<>();
+            }
+            ObservableList<Fornecedor> fornecedoresOb = FXCollections.observableArrayList(fornecedores);
+            CboFornecedor.setItems(fornecedoresOb);
+        }
+
         List<Jogo> jogos;
         try {
-            fornecedores = fornecedorDao.listarAtivos();
             jogos = jogoDao.listar();
         } catch (Exception e) {
-            fornecedores = new ArrayList<>();
             jogos = new ArrayList<>();
         }
-        ObservableList<Fornecedor> fornecedoresOb = FXCollections.observableArrayList(fornecedores);
-        CboFornecedor.setItems(fornecedoresOb);
 
         ObservableList<Jogo> jogosOb = FXCollections.observableArrayList(jogos);
         LstJogos.setItems(jogosOb);
@@ -92,12 +98,12 @@ public class CompraController implements Initializable {
         totalGeral += item.getJogo().getPrecoPadrao() * item.getQuantidade();
         TxtQuantidade.setText("");
         mudarBotoes(true);
-        atualizarLista();
+        atualizarLista(false);
     }
 
     @FXML
     private void BtnAtualizar_Click(ActionEvent evento) throws Exception {
-        atualizarLista();
+        atualizarLista(false);
     }
 
     @FXML
@@ -105,7 +111,7 @@ public class CompraController implements Initializable {
         itens = new ArrayList<>();
         totalGeral = 0d;
         mudarBotoes(false);
-        atualizarLista();
+        atualizarLista(false);
     }
 
     @FXML
@@ -125,7 +131,7 @@ public class CompraController implements Initializable {
         itens = new ArrayList<>();
         totalGeral = 0d;
         mudarBotoes(false);
-        atualizarLista();
+        atualizarLista(false);
     }
 
     private void mudarBotoes(Boolean comItens){
@@ -135,6 +141,6 @@ public class CompraController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        atualizarLista();
+        atualizarLista(true);
     }
 }

@@ -39,6 +39,7 @@ public class ItemVenda {
     @Override
     public String toString(){
         return this.jogo.getNome() + " : " +
-                this.quantidade + (this.quantidade == 1 ? " unidade ":" unidades ");
+                this.quantidade + (this.quantidade == 1 ? " unidade ":" unidades ") +
+                "- " + String.format("%.2f", this.quantidade * this.precoVenda);
     }
 }

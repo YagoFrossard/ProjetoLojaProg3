@@ -64,7 +64,7 @@ public class MainController implements Initializable {
 
     @FXML
     private void BtnCaixa_Click(ActionEvent evento) throws IOException {
-        abrirTela("caixa", "Caixa", 975d, 408d);
+        abrirTela("caixa", "Caixa", 760d, 406d);
     }
 
     private void abrirTela(String nome, String titulo, Double d1, Double d2) {

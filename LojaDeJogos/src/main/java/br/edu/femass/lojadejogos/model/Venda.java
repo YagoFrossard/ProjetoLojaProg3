@@ -59,4 +59,10 @@ public class Venda {
     public void setDesconto(Integer desconto) {
         this.desconto = desconto;
     }
+
+    @Override
+    public String toString(){
+        return "Venda -> Id: " + this.id +
+                " - Total: R$" + String.format("%.2f",this.total);
+    }
 }

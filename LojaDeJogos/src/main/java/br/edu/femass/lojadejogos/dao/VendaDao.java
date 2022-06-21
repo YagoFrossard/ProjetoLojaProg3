@@ -1,18 +1,59 @@
 package br.edu.femass.lojadejogos.dao;
 
-import br.edu.femass.lojadejogos.model.ItemCompra;
 import br.edu.femass.lojadejogos.model.ItemVenda;
 import br.edu.femass.lojadejogos.model.Venda;
 
 import java.sql.*;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VendaDao extends DaoPostgres implements Dao<Venda>{
 
     @Override
     public List<Venda> listar() throws Exception {
-        return null;
+        String sql = "SELECT id, total FROM venda";
+        PreparedStatement ps = getPreparedStatement(sql, false);
+        ResultSet rs = ps.executeQuery();
+
+        List<Venda> vendas = new ArrayList<>();
+
+        while(rs.next()){
+            Venda venda = new Venda();
+            venda.setId(rs.getLong("id"));
+            venda.setTotal(rs.getDouble("total"));
+            vendas.add(venda);
+        }
+
+        return vendas;
+    }
+
+    public List<Venda> listarPorData(String data) throws Exception {
+        String sql = "SELECT id, total FROM venda " +
+                "WHERE venda.data BETWEEN '" + data + " 00:00:00' " +
+                "AND '" + data + " 23:59:59'";
+        PreparedStatement ps = getPreparedStatement(sql, false);
+        ResultSet rs = ps.executeQuery();
+
+        List<Venda> vendas = new ArrayList<>();
+
+        while(rs.next()){
+            Venda venda = new Venda();
+            venda.setId(rs.getLong("id"));
+            /*
+            //Pegando a data
+            Timestamp ts = rs.getTimestamp("data"); //
+            LocalDateTime localDt = null;
+            if( ts != null )
+                localDt =  LocalDateTime.ofInstant(Instant.ofEpochMilli(ts.getTime()), ZoneOffset.UTC);
+            compra.setData(localDt);
+             */
+            venda.setTotal(rs.getDouble("total"));
+
+            vendas.add(venda);
+        }
+
+        return vendas;
     }
 
     @Override
