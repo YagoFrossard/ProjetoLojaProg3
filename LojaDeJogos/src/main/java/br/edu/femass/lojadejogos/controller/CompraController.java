@@ -12,10 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -92,10 +89,21 @@ public class CompraController implements Initializable {
     private void BtnAdicionar_Click(ActionEvent evento){
         Jogo jogo = LstJogos.getSelectionModel().getSelectedItem();
         if(jogo==null) return;
-        if(Integer.parseInt(TxtQuantidade.getText()) < 1) return;
-        ItemCompra item = new ItemCompra(jogo, Integer.parseInt(TxtQuantidade.getText()));
+        if(Integer.parseInt(TxtQuantidade.getText()) < 1){
+            gerarAlerta("Quantidade", "Quantidade nula ou negativa.");
+            return;
+        }
+
+        ItemCompra item;
+        try{
+            item = new ItemCompra(jogo, Integer.parseInt(TxtQuantidade.getText()));
+        }catch(NumberFormatException e){
+            gerarAlerta("Quantidade", "Algum campo está vazio ou incompatível.");
+            return;
+        }
+
         itens.add(item);
-        totalGeral += item.getJogo().getPrecoPadrao() * item.getQuantidade();
+        totalGeral += item.calcularTotal();
         TxtQuantidade.setText("");
         mudarBotoes(true);
         atualizarLista(false);
@@ -137,6 +145,13 @@ public class CompraController implements Initializable {
     private void mudarBotoes(Boolean comItens){
         BtnFinalizar.setDisable(!comItens);
         BtnCancelar.setDisable(!comItens);
+    }
+
+    private void gerarAlerta(String titulo, String contexto){
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle(titulo);
+        alerta.setContentText(contexto);
+        alerta.showAndWait();
     }
 
     @Override

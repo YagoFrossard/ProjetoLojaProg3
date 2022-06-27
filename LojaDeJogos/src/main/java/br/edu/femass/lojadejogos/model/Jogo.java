@@ -10,6 +10,8 @@ public class Jogo {
     private Integer unidEstoque = 0;
     private Classificacao classificacao;
 
+    public Jogo(){}
+
     public Jogo(String nome, Integer anoLancamento, Double precoPadrao) {
         this.nome = nome;
         this.anoLancamento = anoLancamento;
@@ -66,6 +68,14 @@ public class Jogo {
 
     public Boolean podeVender(Integer num){
         return (!(num > unidEstoque));
+    }
+
+    public void vender(Integer num){
+        this.unidEstoque -= num;
+    }
+
+    public void comprar(Integer num){
+        this.unidEstoque += num;
     }
 
     @Override

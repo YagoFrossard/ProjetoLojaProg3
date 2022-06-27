@@ -1,0 +1,4 @@
+--patch-module
+br.edu.femass.lojadejogos=_
+--add-reads
+br.edu.femass.lojadejogos=ALL-UNNAMED

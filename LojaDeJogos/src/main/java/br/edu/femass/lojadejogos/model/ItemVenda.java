@@ -36,6 +36,10 @@ public class ItemVenda {
         this.precoVenda = precoVenda;
     }
 
+    public Double calcularTotal(){
+        return this.quantidade * this.precoVenda;
+    }
+
     @Override
     public String toString(){
         return this.jogo.getNome() + " : " +

@@ -40,14 +40,6 @@ public class VendaDao extends DaoPostgres implements Dao<Venda>{
         while(rs.next()){
             Venda venda = new Venda();
             venda.setId(rs.getLong("id"));
-            /*
-            //Pegando a data
-            Timestamp ts = rs.getTimestamp("data"); //
-            LocalDateTime localDt = null;
-            if( ts != null )
-                localDt =  LocalDateTime.ofInstant(Instant.ofEpochMilli(ts.getTime()), ZoneOffset.UTC);
-            compra.setData(localDt);
-             */
             venda.setTotal(rs.getDouble("total"));
 
             vendas.add(venda);
@@ -94,7 +86,6 @@ public class VendaDao extends DaoPostgres implements Dao<Venda>{
 
             for(ItemVenda item: value.getItens()){
                 //Dando update nas unidades dos jogos
-                //item.getJogo().setUnidEstoque(item.getJogo().getUnidEstoque() - item.getQuantidade());
                 try {
                     jogoDao.alterarEstoque(item.getJogo());
                 } catch (Exception e) {

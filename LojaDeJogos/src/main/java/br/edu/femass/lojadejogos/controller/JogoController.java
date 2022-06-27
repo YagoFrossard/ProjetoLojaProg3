@@ -1,9 +1,7 @@
 package br.edu.femass.lojadejogos.controller;
 
-import br.edu.femass.lojadejogos.dao.ClienteDao;
 import br.edu.femass.lojadejogos.dao.JogoDao;
 import br.edu.femass.lojadejogos.model.Classificacao;
-import br.edu.femass.lojadejogos.model.Cliente;
 import br.edu.femass.lojadejogos.model.Jogo;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

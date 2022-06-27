@@ -93,7 +93,7 @@ public class CompraDao extends DaoPostgres implements Dao<Compra> {
 
             for(ItemCompra item: value.getItens()){
                 //Dando update nas unidades dos jogos
-                item.getJogo().setUnidEstoque(item.getJogo().getUnidEstoque() + item.getQuantidade());
+                item.getJogo().comprar(item.getQuantidade());
                 try {
                     jogoDao.alterarEstoque(item.getJogo());
                 } catch (Exception e) {

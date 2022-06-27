@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -95,18 +92,15 @@ public class VendaController implements Initializable {
     private void BtnAdicionar_Click(ActionEvent evento){
         Jogo jogo = LstJogos.getSelectionModel().getSelectedItem();
         if(jogo==null) return;
-        if(Integer.parseInt(TxtQuantidade.getText()) < 1) return;
-        if(!jogo.podeVender(Integer.parseInt(TxtQuantidade.getText()))) {
-            System.out.println("Quantidade insuficiente para vender.");
-            return;
-        }
+        if(!verificarCampos(jogo)) return;
+
         ItemVenda item = new ItemVenda(jogo, Integer.parseInt(TxtQuantidade.getText()),
-                Double.parseDouble(TxtPrecoJogo.getText()));
-        jogo.setUnidEstoque(jogo.getUnidEstoque() - item.getQuantidade());
+                    Double.parseDouble(TxtPrecoJogo.getText()));
+        jogo.vender(item.getQuantidade());
         itens.add(item);
-        totalGeral += item.getPrecoVenda() * item.getQuantidade();
-        TxtQuantidade.setText("");
-        TxtPrecoJogo.setText("");
+        totalGeral += item.calcularTotal();
+        TxtQuantidade.setText("0");
+        TxtPrecoJogo.setText("0");
         mudarBotoes(true);
         atualizarLista(false);
     }
@@ -124,7 +118,10 @@ public class VendaController implements Initializable {
     @FXML
     private void BtnFinalizar_Click(ActionEvent evento){
         if(Integer.parseInt(TxtDesconto.getText()) >= 100
-        || Integer.parseInt(TxtDesconto.getText()) < 0) return;
+        || Integer.parseInt(TxtDesconto.getText()) < 0) {
+            gerarAlerta("Desconto","Desconto precisa ser positivo menor do que 100");
+            return;
+        }
         Double desconto = Double.parseDouble(TxtDesconto.getText()) / 100;
         Venda venda = new Venda();
         venda.setData(LocalDateTime.now());
@@ -145,8 +142,9 @@ public class VendaController implements Initializable {
     private void limparTela(){
         itens = new ArrayList<>();
         totalGeral = 0d;
-        TxtQuantidade.setText("");
-        TxtPrecoJogo.setText("");
+        CboCliente.setValue(null);
+        TxtQuantidade.setText("0");
+        TxtPrecoJogo.setText("0");
         TxtDesconto.setText("0");
         mudarBotoes(false);
         atualizarLista(false);
@@ -156,6 +154,41 @@ public class VendaController implements Initializable {
     private void mudarBotoes(Boolean comItens){
         BtnFinalizar.setDisable(!comItens);
         BtnCancelar.setDisable(!comItens);
+        CboCliente.setDisable(comItens);
+    }
+
+    private Boolean verificarCampos(Jogo jogo){
+        try {
+            Integer.parseInt(TxtQuantidade.getText());
+            Double.parseDouble(TxtPrecoJogo.getText());
+        }catch(NumberFormatException e){
+            gerarAlerta("Campos", "Algum campo está vazio ou incompatível.");
+            return false;
+        }
+        if(Integer.parseInt(TxtQuantidade.getText()) < 1){
+            gerarAlerta("Quantidade", "Quantidade nula ou negativa.");
+            return false;
+        }
+        if(!jogo.podeVender(Integer.parseInt(TxtQuantidade.getText()))) {
+            gerarAlerta("Quantidade", "Quantidade insuficiente em estoque.");
+            return false;
+        }
+        if(CboCliente.getValue() == null){
+            gerarAlerta("Cliente", "Selecione um cliente para inciar a venda.");
+            return false;
+        }
+        if(!CboCliente.getValue().podeComprar(jogo)) {
+            gerarAlerta("Jogo", "O cliente não tem idade para comprar esse jogo!");
+            return false;
+        }
+        return true;
+    }
+
+    private void gerarAlerta(String titulo, String contexto){
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle(titulo);
+        alerta.setContentText(contexto);
+        alerta.showAndWait();
     }
 
     @Override

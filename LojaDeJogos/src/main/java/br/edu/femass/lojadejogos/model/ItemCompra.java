@@ -26,6 +26,10 @@ public class ItemCompra {
         this.quantidade = quantidade;
     }
 
+    public Double calcularTotal(){
+        return this.quantidade * this.jogo.getPrecoPadrao();
+    }
+
     @Override
     public String toString(){
         return this.jogo.getNome() + " : " +
